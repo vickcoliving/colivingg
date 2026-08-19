@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescott Universo - Escolha sua Trilha</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f3e5d0;
+            color: #2b2b2b;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #f5ebd6;
+            padding: 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        /* --- TELA 1: HOME / TRILHAS --- */
+        .header-title {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .header-title h1 {
+            font-size: 2.5rem;
+            font-style: italic;
+            text-transform: uppercase;
+            color: #1a1a1a;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+        }
+
+        .trilhas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+
+        .coluna-trilha h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #2b2b2b;
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .item-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .item-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: transparent;
+            border: 1px solid #2b2b2b;
+            padding: 8px 12px;
+            width: 100%;
+            max-width: 200px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .item-list li:hover {
+            background-color: #fbe677;
+        }
+
+        .icon-box {
+            width: 14px;
+            height: 14px;
+            border: 1px solid #2b2b2b;
+            background-color: #fff;
+        }
+
+        /* --- TELA 2: CONTEÚDO / DETALHES --- */
+        .badge-main {
+            background-color: #fbe677;
+            padding: 8px 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .secao-decoracao {
+            margin-top: 20px;
+        }
+
+        .sub-badge {
+            background-color: #e59d4e;
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Carrossel de Selos / Imagens */
+        .cards-preview-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stamp-card {
+            background-color: #43503c; /* Verde escuro do layout */
+            padding: 10px;
+            border-radius: 4px;
+            border: 3px dashed #f5ebd6; /* Efeito borda picotada de selo */
+            min-height: 140px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stamp-card::before {
+            content: "Sims Preview";
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.2);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .stamp-card span {
+            color: #fff;
+            font-size: 0.75rem;
+            z-index: 1;
+            background: rgba(0,0,0,0.4);
+            padding: 2px 6px;
+            border-radius: 2px;
+        }
+
+        /* Painel Inferior de Instruções */
+        .info-bottom-section {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .yellow-box-info {
+            background-color: #fbe677;
+            padding: 20px;
+            flex: 1;
+            font-size: 0.85rem;
+            font-weight: bold;
+            line-height: 1.4;
+            border: 1px solid #2b2b2b;
+        }
+
+        .steps-box {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .step-icon {
+            background-color: #e59d4e;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .step-text {
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .trilhas-grid, .cards-preview-container {
+                grid-template-columns: 1fr;
+            }
+            .info-bottom-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PRIMEIRA TELA: ESCOLHA A SUA TRILHA -->
+    <div class="container">
+        <div class="header-title">
+            <h1>Vick Coliving</h1>
+        </div>
+        <div class="subtitle">Aprendendo e compartilhando</div>
+
+        <div class="trilhas-grid">
+            <!-- Coluna 1 -->
+            <div class="coluna-trilha">
+                <h2>Construção</h2>
+                <ul class="item-list">
+                    <li>Portas/Doors <div class="icon-box"></div></li>
+                    <li>Pisos/Floors <div class="icon-box"></div></li>
+                    <li>Paredes/Walls <div class="icon-box"></div></li>
+                </ul>
+            </div>
+
+            <!-- Coluna 2 -->
+            <div class="coluna-trilha">
+                <h2>CAS</h2>
+                <ul class="item-list">
+                    <li>Cabelo/Hair <div class="icon-box"></div></li>
+                    <li>Olhos/Eyes <div class="icon-box"></div></li>
+                    <li>Roupas/Clothes <div class="icon-box"></div></li>
+                </ul>
+            </div>
+
+            <!-- Coluna 3 -->
+            <div class="coluna-trilha">
+                <h2>Objetos</h2>
+                <ul class="item-list">
+                    <li>Mesas <div class="icon-box"></div></li>
+                    <li>Balcões <div class="icon-box"></div></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEGUNDA TELA: DETALHES DA TRILHA SELECIONADA -->
+    <div class="container">
+        <div class="badge-main">Modo Construção Ativado</div>
+        
+        <div class="secao-decoracao">
+            <div class="sub-badge">Decoração</div>
+            
+            <!-- Grid de Imagens com Estilo de Selo Verde -->
+            <div class="cards-preview-container">
+                <div class="stamp-card"><span>Exemplo Vista 1</span></div>
+                <div class="stamp-card"><span>Exemplo Vista 2</span></div>
+                <div class="stamp-card"><span>Exemplo Vista 3</span></div>
+                <div class="stamp-card"><span>Exemplo Vista 4</span></div>
+            </div>
+        </div>
+
+        <!-- Seção de Passos e Instruções de Instalação -->
+        <div class="info-bottom-section">
+            <div class="yellow-box-info">
+                LEIA AS INSTRUÇÕES AO LADO PARA APLICAR NO SEU JOGO CORRETAMENTE.
+            </div>
+            
+            <div class="steps-box">
+                <div class="step-item">
+                    <div class="step-icon">01</div>
+                    <div class="step-text">Faça o download dos arquivos customizados da trilha escolhida.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">02</div>
+                    <div class="step-text">Extraia os arquivos na pasta "Mods" dentro do diretório do seu jogo Electronic Arts.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-icon">03</div>
+                    <div class="step-text">Certifique-se de ativar o conteúdo personalizado nas opções de sistema do jogo.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
